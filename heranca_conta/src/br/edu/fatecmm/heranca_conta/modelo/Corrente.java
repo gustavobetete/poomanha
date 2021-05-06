@@ -23,9 +23,15 @@ public class Corrente extends Conta {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
         sb.append("limite=").append(limite).append("\n");
         return sb.toString();
+    }
+
+    @Override
+    public void imprimirExtrato() {
+        System.out.println("Extrato de Conta Corrente");
+        //coloca o codigo
     }
 }

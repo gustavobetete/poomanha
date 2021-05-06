@@ -18,4 +18,10 @@ public class Poupanca extends Conta {
         sb.append("diaAniversario=").append(diaAniversario).append("\n");
         return sb.toString();
     }
+
+    @Override
+    public void imprimirExtrato() {
+        System.out.println("Extrato de Poupança");
+        //aqui entraria
+    }
 }

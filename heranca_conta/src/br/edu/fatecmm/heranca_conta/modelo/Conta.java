@@ -2,7 +2,7 @@ package br.edu.fatecmm.heranca_conta.modelo;
 
 import java.util.Date;
 
-public class Conta {
+public abstract class Conta {
     private int numConta;
     private String nomeCliente;
     private double saldo;
@@ -65,4 +65,10 @@ public class Conta {
         sb.append("dataAbertura='").append(dataAbertura).append("\n");
         return sb.toString();
     }
+
+    /**
+     * Toda classe deve implementar o método e comportamento
+     * de impressão de extrato.
+     */
+    abstract void imprimirExtrato();
 }
