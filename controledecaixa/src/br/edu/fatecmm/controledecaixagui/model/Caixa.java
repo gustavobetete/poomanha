@@ -1,5 +1,7 @@
 package br.edu.fatecmm.controledecaixagui.model;
 
+import br.edu.fatecmm.controledecaixagui.utils.SemSaldoException;
+
 public class Caixa {
     private double saldo;
 
@@ -7,12 +9,11 @@ public class Caixa {
         return saldo;
     }
 
-    public boolean sacar(double valor){
-        if(valor < saldo){
-            saldo -= valor;
-            return true;
+    public void sacar(double valor) throws SemSaldoException {
+        if(valor > saldo){
+            throw new SemSaldoException();
         }
-        return false;
+        saldo -=valor;
     }
 
     public boolean depositar(double valor){

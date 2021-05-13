@@ -1,6 +1,7 @@
 package br.edu.fatecmm.controledecaixagui.view;
 
 import br.edu.fatecmm.controledecaixagui.model.Caixa;
+import br.edu.fatecmm.controledecaixagui.utils.SemSaldoException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,19 +125,21 @@ public class CaixaGUI extends JFrame implements ActionListener, WindowListener {
         }
         if(e.getSource()==cmdRetirada){
             double valor = Double.parseDouble(txtValor.getText());
-            boolean sacou =  caixa.sacar(valor);
-            if(sacou){
+            boolean sacou = false;
+            try {
+                caixa.sacar(valor);
                 JOptionPane.showMessageDialog(null,
                         "Saque efetuado",
                         "Saque",
                         JOptionPane.INFORMATION_MESSAGE);
                 txtMsg.append("Saque de " + valor + " foi efetuado com sucesso\n");
-            }else{
+            } catch (SemSaldoException semSaldoException) {
                 JOptionPane.showMessageDialog(null,
-                        "Sem saldo suficiente",
+                         semSaldoException.getMessage(),
                         "Erro",
                         JOptionPane.ERROR_MESSAGE);
             }
+
             txtValor.setText("");
             txtValor.requestFocus(); //Colocar o foco no controle.
         }

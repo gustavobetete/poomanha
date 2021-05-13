@@ -1,6 +1,7 @@
 package br.edu.fatecmm.controledecaixagui.view;
 
 import br.edu.fatecmm.controledecaixagui.model.Caixa;
+import br.edu.fatecmm.controledecaixagui.utils.SemSaldoException;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -45,22 +46,29 @@ public class CaixaGUI2 {
         cmdRetirada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                double valor = Double.parseDouble(txtValor.getText());
-                boolean sacou =  caixa.sacar(valor);
-                if(sacou){
+                try {
+                    double valor = Double.parseDouble(txtValor.getText());
+
+                    caixa.sacar(valor);
                     JOptionPane.showMessageDialog(null,
                             "Saque efetuado",
                             "Saque",
                             JOptionPane.INFORMATION_MESSAGE);
                     txtMsg.append("Saque de " + valor + " foi efetuado com sucesso\n");
-                }else{
+                    txtValor.setText("");
+                    txtValor.requestFocus(); //Colocar o foco no controle.
+                } catch (SemSaldoException semSaldoException) {
                     JOptionPane.showMessageDialog(null,
                             "Sem saldo suficiente",
                             "Erro",
                             JOptionPane.ERROR_MESSAGE);
+                }catch(NumberFormatException exception){
+                    JOptionPane.showMessageDialog(null,
+                            "Entrada de dados inválida",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
                 }
-                txtValor.setText("");
-                txtValor.requestFocus(); //Colocar o foco no controle.
+
             }
         });
         cmdConsulta.addMouseListener(new MouseAdapter() {
