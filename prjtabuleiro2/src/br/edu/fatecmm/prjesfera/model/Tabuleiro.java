@@ -10,8 +10,8 @@ public class Tabuleiro {
 
     public Tabuleiro(){
         Random random  = new Random();
-        for (int i = 0; i < 100; i++) {
-            tabuleiro.add(random.nextInt(101));
+        for (int i = 1; i < 26; i++) {
+            tabuleiro.add(random.nextInt(76));
         }
     }
 
@@ -41,7 +41,7 @@ public class Tabuleiro {
             }else{
                 System.out.printf("[%3d]  ", x);
             }
-            if(i % 10 ==0) System.out.println();
+            if(i % 5 == 0) System.out.println();
 
         }
     }
